@@ -1,6 +1,9 @@
 package com.example.anthonyaje.touchme;
 
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,54 +13,79 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     boolean color_flag=true;
     View rootView=null;
+    ImageView box=null;
     Long ts = null;
     String TAG = "TouchMe";
+    boolean first_touch=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /* full-screen */
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         View tvView = findViewById(R.id.tv_hello);
+        ImageView img_bt = (ImageView) findViewById(R.id.imageView2);
+
+        box = (ImageView) findViewById(R.id.imageView);
         rootView = tvView.getRootView();
-        rootView.setBackgroundColor(getResources().getColor(android.R.color.white));
+        box.setBackgroundColor(getResources().getColor(android.R.color.black));
+        //rootView.setBackgroundColor(getResources().getColor(android.R.color.white));
+        rootView.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
 
-        Button bt_flip = (Button) findViewById(R.id.button_flip);
-
-        bt_flip.setOnClickListener(new View.OnClickListener() {
+        img_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(color_flag){
                     ts = System.currentTimeMillis();
-                    Log.d(TAG,color_flag+" time :"+ts);
-                    rootView.setBackgroundColor(getResources().getColor(android.R.color.black));
+                    Log.d(TAG, color_flag + " time :" + ts);
+                    //rootView.setBackgroundColor(getResources().getColor(android.R.color.black));
+                    box.setBackgroundColor(getResources().getColor(android.R.color.black));
                 }else{
                     ts = System.currentTimeMillis();
-                    Log.d(TAG,color_flag+" time :"+ts);
-                    rootView.setBackgroundColor(getResources().getColor(android.R.color.white));
+                    Log.d(TAG, color_flag + " time :" + ts);
+                    //rootView.setBackgroundColor(getResources().getColor(android.R.color.white));
+                    box.setBackgroundColor(getResources().getColor(android.R.color.white));
                 }
                 color_flag=!color_flag;
             }
         });
+
     }
 
-/*
-    @Override
+
+/*    @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(color_flag){
-            rootView.setBackgroundColor(getResources().getColor(android.R.color.black));
-        }else{
-            rootView.setBackgroundColor(getResources().getColor(android.R.color.white));
+        if(first_touch) {
+            first_touch=false;
+            if (color_flag) {
+                ts = System.currentTimeMillis();
+                Log.d(TAG, color_flag + " time :" + ts);
+                //rootView.setBackgroundColor(getResources().getColor(android.R.color.black));
+                box.setBackgroundColor(getResources().getColor(android.R.color.black));
+            } else {
+                ts = System.currentTimeMillis();
+                Log.d(TAG, color_flag + " time :" + ts);
+                //rootView.setBackgroundColor(getResources().getColor(android.R.color.white));
+                box.setBackgroundColor(getResources().getColor(android.R.color.white));
+            }
+            first_touch=true;
+            color_flag = !color_flag;
         }
-        return color_flag=!color_flag;
+        return true;
     }
 */
 
