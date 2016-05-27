@@ -20,11 +20,11 @@
 
     <ImageView
         android:layout_width="16dp"
-        android:layout_height="10dp"
+        android:layout_height="16dp"
         android:id="@+id/imageView"
-        android:layout_above="@+id/imageView2"
-        android:layout_marginLeft="22dp"
-        android:layout_marginBottom="80dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+         />
 
     <ImageView
         android:layout_width="200dp"
